@@ -1,6 +1,13 @@
+const Category = require('../models/categoryModel')
+
 const categoryController ={
     getCategories: async(req, res) => {
-        res.json('Category test ctrl')
+        try{
+            const categories = await Category.find()
+            res.json(categories)
+        }catch (err) {
+            return res.status(500).json({msg:err.message})
+        }
     }
 }
 module.exports = categoryController
